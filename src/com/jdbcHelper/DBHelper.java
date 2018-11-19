@@ -1,6 +1,7 @@
 package com.jdbcHelper;
 
 import com.mysql.cj.x.protobuf.MysqlxSession;
+import com.po.ClassroomPO;
 import com.po.Divorced;
 
 import java.sql.Connection;
@@ -26,7 +27,7 @@ public class DBHelper {
      * "?useUnicode=true&characterEncoding=UTF-8" 指定编码格式，无需时可省略，
      * 即地址直接为："jdbc:mysql://localhost:3306/shopping"
      */
-    private static final String url="jdbc:mysql://localhost:3306/project-moviedb?useUnicode=true&characterEncoding=UTF-8";
+    private static final String url="jdbc:mysql://localhost:3306/project3-nudb?useUnicode=true&characterEncoding=UTF-8";
 
     private static final String username="hhh";//数据库的用户名
     private static final String password="hhh123456";//数据库的密码:这个是自己安装数据库的时候设置的，每个人不同。
@@ -76,13 +77,14 @@ public class DBHelper {
         {
             ex.printStackTrace();
         }
-        PreparedStatement pst = conn.prepareStatement("SELECT * FROM divorced");
+        PreparedStatement pst = conn.prepareStatement("SELECT * FROM classroom");
         ResultSet rs = pst.executeQuery();
         while (rs.next()) {
-            Divorced divorced = new Divorced();
-            divorced.setCoupleNum(rs.getInt(1));
-            divorced.setDate(rs.getDate(2));
-            System.out.println(divorced.toString());
+            ClassroomPO classroomPO = new ClassroomPO();
+            classroomPO.setClassrommId(rs.getString(1));
+            classroomPO.setSeats(rs.getInt(2));
+            classroomPO.setType(rs.getString(3));
+            System.out.println(classroomPO.toString());
         }
 
     }
