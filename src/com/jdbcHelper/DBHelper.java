@@ -58,6 +58,14 @@ public class DBHelper {
         return conn;
     }
 
+    public static void colseConnection() throws Exception {
+        if (conn == null) {
+            return;
+        } else {
+            conn.close();
+        }
+    }
+
     //写main方法测试是否连接成功，可将本类运行为Java程序先进行测试，再做后续的数据库操作。
     public static void main(String[] args) throws Exception{
         Connection conn = DBHelper.getConnection();
