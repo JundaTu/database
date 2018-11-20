@@ -4,21 +4,21 @@ package com.po;
  * @program database
  * @description: TODO:
  * @author: tujunda
- * @create: 2018/11/18 21:21
+ * @create: 2018/11/20 15:14
  */
-public class UnitOfStudy {
+public class EnrollableCourse {
     private String UoSCode;
-    private String edptId;
     private String UoSName;
-    private int credits;
+    private String quarter;
+    private int year;
 
     @Override
     public String toString() {
-        return "UnitOfStudy{" +
+        return "EnrollableCourse{" +
                 "UoSCode='" + UoSCode + '\'' +
-                ", edptId='" + edptId + '\'' +
                 ", UoSName='" + UoSName + '\'' +
-                ", credits=" + credits +
+                ", quarter='" + quarter + '\'' +
+                ", year=" + year +
                 '}';
     }
 
@@ -30,14 +30,6 @@ public class UnitOfStudy {
         UoSCode = uoSCode;
     }
 
-    public String getEdptId() {
-        return edptId;
-    }
-
-    public void setEdptId(String edptId) {
-        this.edptId = edptId;
-    }
-
     public String getUoSName() {
         return UoSName;
     }
@@ -46,12 +38,20 @@ public class UnitOfStudy {
         UoSName = uoSName;
     }
 
-    public int getCredits() {
-        return credits;
+    public String getQuarter() {
+        return quarter;
     }
 
-    public void setCredits(int credits) {
-        this.credits = credits;
+    public void setQuarter(String quarter) {
+        this.quarter = quarter;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 }
 

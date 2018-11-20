@@ -6,7 +6,7 @@ package com.po;
  * @author: tujunda
  * @create: 2018/11/18 21:25
  */
-public class WhenOffered {
+public class WhenOfferedPO {
     private String UoSCode;
     private String semester;
 
@@ -28,7 +28,7 @@ public class WhenOffered {
 
     @Override
     public String toString() {
-        return "WhenOffered{" +
+        return "WhenOfferedPO{" +
                 "UoSCode='" + UoSCode + '\'' +
                 ", semester='" + semester + '\'' +
                 '}';

@@ -79,6 +79,14 @@ public class LoginScreen {
         } catch (Exception e) {
             System.out.println("There are something wrong with tanscriptLevel");
         }
+
+        /////////////test for enrollLevel
+        EnrollLevel enrollLevel = new EnrollLevel();
+        try {
+            enrollLevel.beginEnroll(studentPO);
+        } catch (Exception e) {
+            System.out.println("There are something wrong with Enrollment");
+        }
     }
 }
 

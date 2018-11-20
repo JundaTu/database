@@ -44,12 +44,13 @@ public class TranscriptLevel {
         Scanner sc = new Scanner(System.in);
         while (true) {
             System.out.println("///////////////////////////////////////////////////");
+            System.out.println("HERE TRANCRIPTION");
             System.out.println("You can access the detail of courses you enrolled by entering the UoSCode");
             System.out.println("Or you can input \"back\" to go back to student menu");
 
             String command = sc.next();
             //command = command.toCase();
-            if (command == "back") {
+            if (command.equals("back")) {
                 return Levels.STUDENT_MENU.getIndex();
             } else if (takenCoursesSet.contains(command)){
                 String courseInfoQuery = "select t.UoSCode, t.Year, t.Semester, t.Grade, f.Name as lecturerName, uoso.Enrollment, uoso.MaxEnrollment" +
