@@ -15,4 +15,10 @@ public class TranscriptLevelTest {
         TranscriptLevel transcriptLevel = new TranscriptLevel();
         transcriptLevel.getTranscript(studentPO);
     }
+    public static void main(String[] args) throws Exception{
+        StudentPO studentPO = new StudentPO();
+        studentPO.setId(3213);
+        TranscriptLevel transcriptLevel = new TranscriptLevel();
+        transcriptLevel.getTranscript(studentPO);
+    }
 }
