@@ -71,6 +71,14 @@ public class LoginScreen {
             System.out.print("Exception found of student menu");
         }
         System.out.print(rs);
+
+        /////////////test for transcript
+        TranscriptLevel transcriptLevel = new TranscriptLevel();
+        try {
+            transcriptLevel.getTranscript(studentPO);
+        } catch (Exception e) {
+            System.out.println("There are something wrong with tanscriptLevel");
+        }
     }
 }
 
