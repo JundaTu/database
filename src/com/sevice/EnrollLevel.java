@@ -2,6 +2,7 @@ package com.sevice;
 
 import com.Enum.Levels;
 import com.jdbcHelper.DBHelper;
+import com.otherUsefulObject.ConsForLevels;
 import com.otherUsefulObject.Semester;
 import com.po.EnrollableCourse;
 import com.po.RequiresPO;
@@ -101,7 +102,7 @@ public class EnrollLevel {
 
             String courseCode = sc.next();
             if (courseCode.equals("back")) {
-                return Levels.STUDENT_MENU.getIndex();
+                return ConsForLevels.STUDENT_MENU;
             }
             System.out.println("input the year");
             String goalYear = sc.next();
