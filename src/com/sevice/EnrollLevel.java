@@ -3,6 +3,7 @@ package com.sevice;
 import com.Enum.Levels;
 import com.jdbcHelper.DBHelper;
 import com.otherUsefulObject.ConsForLevels;
+import com.otherUsefulObject.Navigator;
 import com.otherUsefulObject.Semester;
 import com.po.EnrollableCourse;
 import com.po.RequiresPO;
@@ -98,11 +99,28 @@ public class EnrollLevel {
             for (EnrollableCourse ec : listOfEnrollableCourse) {
                 System.out.println(ec.toString());
             }
-            System.out.println("Your can enter the course you want to enroll or you can enter \"back\" to got back to student menu");
+            System.out.println("###Your can access each other portals following: ");
+            System.out.println("1.Transcript");
+            System.out.println("2.Student menu");
+            System.out.println("3.Withdraw");
+            System.out.println("4.Personal");
+            System.out.println("5.Logout");
+            System.out.println("6.Exit");
 
-            String courseCode = sc.next();
-            if (courseCode.equals("back")) {
-                return ConsForLevels.STUDENT_MENU;
+            System.out.println("###OR Your can enter the course you want to enroll");
+
+            String courseCode = sc.nextLine();
+            courseCode = courseCode.toLowerCase();
+            if (Navigator.navigator.contains(courseCode)) {
+                int code = Navigator.toDifferntScreen(courseCode);
+                if (code == -1) {
+                    System.out.println(courseCode + " is unknown.");
+                    System.out.print("Please enter the right command");
+                    System.out.print("Enter: ");
+                    continue;
+                } else {
+                    return code;
+                }
             }
             System.out.println("input the year");
             String goalYear = sc.next();

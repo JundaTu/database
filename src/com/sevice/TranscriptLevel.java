@@ -3,6 +3,7 @@ package com.sevice;
 import com.Enum.Levels;
 import com.jdbcHelper.DBHelper;
 import com.otherUsefulObject.ConsForLevels;
+import com.otherUsefulObject.Navigator;
 import com.po.CourseDetailPO;
 import com.po.StudentPO;
 import com.po.TranscriptPO;
@@ -46,13 +47,28 @@ public class TranscriptLevel {
         while (true) {
             System.out.println("///////////////////////////////////////////////////");
             System.out.println("HERE TRANCRIPTION");
-            System.out.println("You can access the detail of courses you enrolled by entering the UoSCode");
-            System.out.println("Or you can input \"back\" to go back to student menu");
+            System.out.println("###Your can access each other portals following: ");
+            System.out.println("1.Personal");
+            System.out.println("2.Student menu");
+            System.out.println("3.Withdraw");
+            System.out.println("4.Enroll");
+            System.out.println("5.Logout");
+            System.out.println("6.Exit");
+            System.out.println("### Or you can access the detail of courses you enrolled by entering the UoSCode");
+            //System.out.println("Or you can input \"back\" to go back to student menu");
 
-            String command = sc.next();
+            String command = sc.nextLine();
             //command = command.toCase();
-            if (command.equals("back")) {
-                return ConsForLevels.STUDENT_MENU;
+            if (Navigator.navigator.contains(command)) {
+                int code = Navigator.toDifferntScreen(command);
+                if (code == -1) {
+                    System.out.println(command + " is unknown.");
+                    System.out.print("Please enter the right command");
+                    System.out.print("Enter: ");
+                    continue;
+                } else {
+                    return code;
+                }
             } else if (takenCoursesSet.contains(command)){
                 String courseInfoQuery = "select t.UoSCode, t.Year, t.Semester, t.Grade, f.Name as lecturerName, uoso.Enrollment, uoso.MaxEnrollment" +
                         " from unitofstudy as uos, transcript as t, uosoffering as uoso, faculty as f" +

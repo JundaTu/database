@@ -3,6 +3,7 @@ package com.sevice;
 import com.Enum.Levels;
 import com.jdbcHelper.DBHelper;
 import com.otherUsefulObject.ConsForLevels;
+import com.otherUsefulObject.Navigator;
 import com.po.StudentPO;
 
 import java.sql.Connection;
@@ -23,11 +24,29 @@ public class PersonalDetailScreen {
         Scanner sc = new Scanner(System.in);
         System.out.println(studentPO.toString());
         while (true) {
-            System.out.println("You can enter \"password\", \"address\" or \"back\" to change password, address or go back to student menu");
-            String command = sc.next();
+            System.out.println("###Your can access each other portals following: ");
+            System.out.println("1.Transcript");
+            System.out.println("2.Student menu");
+            System.out.println("3.Withdraw");
+            System.out.println("4.Enroll");
+            System.out.println("5.Logout");
+            System.out.println("6.Exit");
+            System.out.println("###You can enter \"password\" or \"address\" to change password, address.");
+            String command = sc.nextLine();
             command = command.toLowerCase();
-            if (command.equals("back")) {
-                return ConsForLevels.STUDENT_MENU;
+            command = command.toLowerCase();
+
+            //TODO: go back to other menu
+            if (Navigator.navigator.contains(command)) {
+                int code = Navigator.toDifferntScreen(command);
+                if (code == -1) {
+                    System.out.println(command + " is unknown.");
+                    System.out.print("Please enter the right command");
+                    System.out.print("Enter: ");
+                    continue;
+                } else {
+                    return code;
+                }
             } else if (command.equals("password")) {
                 //change password
                 while (true) {
