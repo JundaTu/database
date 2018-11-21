@@ -26,6 +26,8 @@ public class EnrollLevel {
         Set<String> finishedCousre = new HashSet<>();
         List<EnrollableCourse> listOfEnrollableCourse = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+
+
         ///how to get the current time
 
         Semester curSemester = TimeUtils.getCurrrentSemester();
@@ -63,6 +65,15 @@ public class EnrollLevel {
 
 
         ///////////////////fill the taken courses set
+        //////////////////
+        /////////////////////////
+        /**
+         * @Author tujunda
+         * @Description TODO: find the courses finished for future test of pre-requirement
+         * @Date 17:43 11/20/18
+         * @Param [studentPO]
+         * @return int
+         **/
         String queryForTakenCourse = "select * from transcript where grade is not null and StudId = " + studentPO.getId();
         PreparedStatement takenCoursesStatement = conn.prepareStatement(queryForTakenCourse);
         ResultSet rsForTakenCourse = takenCoursesStatement.executeQuery();
@@ -72,6 +83,16 @@ public class EnrollLevel {
 
         }
 
+
+
+
+        /**
+         * @Author tujunda
+         * @Description TODO: the following are enroll
+         * @Date 17:42 11/20/18
+         * @Param [studentPO]
+         * @return int
+         **/
         while (true) {
             for (EnrollableCourse ec : listOfEnrollableCourse) {
                 System.out.println(ec.toString());
