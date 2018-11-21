@@ -2,6 +2,7 @@ package com.sevice;
 
 import com.Enum.Levels;
 import com.jdbcHelper.DBHelper;
+import com.otherUsefulObject.ConsForLevels;
 import com.po.StudentPO;
 import com.po.TranscriptPO;
 
@@ -51,8 +52,8 @@ public class StudentMenu {
         System.out.println("2.Enroll");
         System.out.println("3.Withdraw");
         System.out.println("4.Personal");
-        System.out.println("5.Detail");
         System.out.println("6.Logout");
+        System.out.println("7.Exit");
 
         System.out.println("You can input the full name like transcript(not matter uppercase or lowercase) to access that part ");
 
@@ -64,15 +65,17 @@ public class StudentMenu {
             levelName = levelName.toLowerCase();
             switch (levelName) {
                 case "transcript":
-                    return Levels.TRANSCRIPT.getIndex();
+                    return ConsForLevels.TRANSCRIPT;
                 case "enroll":
-                    return Levels.ENROLL.getIndex();
+                    return ConsForLevels.ENROLL;
                 case "personal":
-                    return Levels.PERSONAL.getIndex();
-                case "detail":
-                    return Levels.DETAIL.getIndex();
+                    return ConsForLevels.PERSONAL;
                 case "logout":
-                    return Levels.LOGOUT.getIndex();
+                    return ConsForLevels.LOGOUT;
+                case "withdraw":
+                    return ConsForLevels.WITHDRAW;
+                case "exit" :
+                    return ConsForLevels.EXIT;
                 default:
                     System.out.println(levelName + " is unknown.");
                     System.out.print("Please enter the right command");

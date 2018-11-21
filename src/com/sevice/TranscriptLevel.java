@@ -2,6 +2,7 @@ package com.sevice;
 
 import com.Enum.Levels;
 import com.jdbcHelper.DBHelper;
+import com.otherUsefulObject.ConsForLevels;
 import com.po.CourseDetailPO;
 import com.po.StudentPO;
 import com.po.TranscriptPO;
@@ -51,7 +52,7 @@ public class TranscriptLevel {
             String command = sc.next();
             //command = command.toCase();
             if (command.equals("back")) {
-                return Levels.STUDENT_MENU.getIndex();
+                return ConsForLevels.STUDENT_MENU;
             } else if (takenCoursesSet.contains(command)){
                 String courseInfoQuery = "select t.UoSCode, t.Year, t.Semester, t.Grade, f.Name as lecturerName, uoso.Enrollment, uoso.MaxEnrollment" +
                         " from unitofstudy as uos, transcript as t, uosoffering as uoso, faculty as f" +

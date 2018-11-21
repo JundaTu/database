@@ -4,7 +4,7 @@ public enum Levels {
     LOGIN(1), STUDENT_MENU(2),
     TRANSCRIPT(3), ENROLL(4),
     WITHDRAW(5), PERSONAL(6),
-    DETAIL(7),     LOGOUT(8);
+    LOGOUT(7);
 
     private int index;
 

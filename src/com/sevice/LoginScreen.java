@@ -24,7 +24,13 @@ public class LoginScreen {
             Scanner sc = new Scanner(System.in);
             sc.useDelimiter("\n");
             System.out.print("Input your id:");
-            int id = sc.nextInt();
+            int id;
+            try {
+                id = sc.nextInt();
+            } catch (Exception e) {
+                System.out.println("Please input digital number");
+                continue;
+            }
             System.out.println("");
             System.out.print("Input your password:");
             String password = sc.next();
@@ -33,9 +39,16 @@ public class LoginScreen {
             Connection conn = DBHelper.getConnection();
 
             String query = "select * from student where id = " + id + " and password = " + "'" + password + "'";
+            PreparedStatement statement;
+            ResultSet rs;
+            try {
+                statement = conn.prepareStatement(query);
+                rs = statement.executeQuery();
+            } catch (Exception e) {
+                System.out.println("Please input right id and password");
+                continue;
+            }
 
-            PreparedStatement statement = conn.prepareStatement(query);
-            ResultSet rs = statement.executeQuery();
 
 
             while (rs.next()) {
