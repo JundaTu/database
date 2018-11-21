@@ -58,21 +58,27 @@ public class StudentMenu {
 
         ////////////////////////////
         Scanner sc = new Scanner(System.in);
-        String levelName = sc.next();
-        levelName = levelName.toLowerCase();
-        switch (levelName) {
-            case "transcript":
-                return Levels.TRANSCRIPT.getIndex();
-            case "enroll":
-                return Levels.ENROLL.getIndex();
-            case "personal":
-                return Levels.PERSONAL.getIndex();
-            case "detail":
-                return Levels.DETAIL.getIndex();
-            case "logout":
-                return Levels.LOGOUT.getIndex();
-            default:
-                return Levels.LOGOUT.getIndex();
+
+        while (true) {
+            String levelName = sc.next();
+            levelName = levelName.toLowerCase();
+            switch (levelName) {
+                case "transcript":
+                    return Levels.TRANSCRIPT.getIndex();
+                case "enroll":
+                    return Levels.ENROLL.getIndex();
+                case "personal":
+                    return Levels.PERSONAL.getIndex();
+                case "detail":
+                    return Levels.DETAIL.getIndex();
+                case "logout":
+                    return Levels.LOGOUT.getIndex();
+                default:
+                    System.out.println(levelName + " is unknown.");
+                    System.out.print("Please enter the right command");
+                    System.out.print("Enter: ");
+                    continue;
+            }
         }
     }
 }

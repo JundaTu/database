@@ -6,7 +6,7 @@ package com.po;
  * @author: tujunda
  * @create: 2018/11/18 21:23
  */
-public class UoSOffering {
+public class UoSOfferingPO {
     private String UoSCode;
     private String semester;
     private int year;
@@ -73,7 +73,7 @@ public class UoSOffering {
 
     @Override
     public String toString() {
-        return "UoSOffering{" +
+        return "UoSOfferingPO{" +
                 "UoSCode='" + UoSCode + '\'' +
                 ", semester='" + semester + '\'' +
                 ", year=" + year +

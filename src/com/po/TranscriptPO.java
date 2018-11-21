@@ -55,7 +55,7 @@ public class TranscriptPO {
 
     @Override
     public String toString() {
-        return "TranscriptPO{" +
+        return "Transcript: {" +
                 "studId=" + studId +
                 ", UoSCode='" + UoSCode + '\'' +
                 ", semester='" + semester + '\'' +
