@@ -15,5 +15,6 @@ public class ConsForLevels {
     public static final int PERSONAL = 6;
     public static final int LOGOUT = 7;
     public static final int EXIT = 8;
+    public static final int ERROR = -1;
 }
 

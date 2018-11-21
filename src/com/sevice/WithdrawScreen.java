@@ -3,6 +3,7 @@ package com.sevice;
 import com.Enum.Levels;
 import com.jdbcHelper.DBHelper;
 import com.otherUsefulObject.ConsForLevels;
+import com.otherUsefulObject.Navigator;
 import com.po.StudentPO;
 import com.po.TranscriptPO;
 
@@ -46,10 +47,25 @@ public class WithdrawScreen {
                 System.out.println(s);
             }
             System.out.println();
+            System.out.println("###Your can access each other portals following: ");
+            System.out.println("1.Transcript");
+            System.out.println("2.Student menu");
+            System.out.println("3.Enroll");
+            System.out.println("4.Personal");
+            System.out.println("5.Logout");
+            System.out.println("6.Exit");
             System.out.println("You can enter \"back\" to go back to student menu OR you can enter the course that you want to withdraw");
-            String command = sc.next();
-            if (command.equals("back")) {
-                return ConsForLevels.STUDENT_MENU;
+            String command = sc.nextLine();
+            if (Navigator.navigator.contains(command)) {
+                int code = Navigator.toDifferntScreen(command);
+                if (code == -1) {
+                    System.out.println(command + " is unknown.");
+                    System.out.print("Please enter the right command");
+                    System.out.print("Enter: ");
+                    continue;
+                } else {
+                    return code;
+                }
             } else if (curCourseSet.contains(command)) {
                 //call store procedure to finish withdraw
                 System.out.println("Withdraw the class successfully.");

@@ -24,13 +24,7 @@ public class LoginScreen {
             Scanner sc = new Scanner(System.in);
             sc.useDelimiter("\n");
             System.out.print("Input your id:");
-            int id;
-            try {
-                id = sc.nextInt();
-            } catch (Exception e) {
-                System.out.println("Please input digital number");
-                continue;
-            }
+            String id = sc.nextLine();
             System.out.println("");
             System.out.print("Input your password:");
             String password = sc.next();

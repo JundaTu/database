@@ -3,6 +3,7 @@ package com.sevice;
 import com.Enum.Levels;
 import com.jdbcHelper.DBHelper;
 import com.otherUsefulObject.ConsForLevels;
+import com.otherUsefulObject.Navigator;
 import com.po.StudentPO;
 import com.po.TranscriptPO;
 
@@ -52,8 +53,8 @@ public class StudentMenu {
         System.out.println("2.Enroll");
         System.out.println("3.Withdraw");
         System.out.println("4.Personal");
-        System.out.println("6.Logout");
-        System.out.println("7.Exit");
+        System.out.println("5.Logout");
+        System.out.println("6.Exit");
 
         System.out.println("You can input the full name like transcript(not matter uppercase or lowercase) to access that part ");
 
@@ -61,26 +62,16 @@ public class StudentMenu {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            String levelName = sc.next();
+            String levelName = sc.nextLine();
             levelName = levelName.toLowerCase();
-            switch (levelName) {
-                case "transcript":
-                    return ConsForLevels.TRANSCRIPT;
-                case "enroll":
-                    return ConsForLevels.ENROLL;
-                case "personal":
-                    return ConsForLevels.PERSONAL;
-                case "logout":
-                    return ConsForLevels.LOGOUT;
-                case "withdraw":
-                    return ConsForLevels.WITHDRAW;
-                case "exit" :
-                    return ConsForLevels.EXIT;
-                default:
-                    System.out.println(levelName + " is unknown.");
-                    System.out.print("Please enter the right command");
-                    System.out.print("Enter: ");
-                    continue;
+            int code = Navigator.toDifferntScreen(levelName);
+            if (code == -1) {
+                System.out.println(levelName + " is unknown.");
+                System.out.print("Please enter the right command");
+                System.out.print("Enter: ");
+                continue;
+            } else {
+                return code;
             }
         }
     }
