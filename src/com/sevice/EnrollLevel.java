@@ -167,6 +167,14 @@ public class EnrollLevel {
                     }
                     if (finishedCousre.contains(requiresPO.getPrereqUoSCode())) {
                         //call store procesure to
+                        EnrollableCourse chosenCourse;
+                        for (EnrollableCourse ec : listOfEnrollableCourse) {
+                            if (ec.getUoSCode().equals(courseCode)) {
+//                                chosenCourse = ec;
+                                listOfEnrollableCourse.remove(ec);
+                                break;
+                            }
+                        }
                         System.out.print("you can enroll");
 
 
