@@ -25,7 +25,7 @@ public class LoginScreen {
             sc.useDelimiter("\n");
             System.out.print("Input your id:");
             String id = sc.nextLine();
-            System.out.println("");
+            System.out.println();
             System.out.print("Input your password:");
             String password = sc.next();
 

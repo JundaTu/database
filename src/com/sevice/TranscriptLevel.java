@@ -36,7 +36,7 @@ public class TranscriptLevel {
             transcriptPO.setStudId(rs.getInt(1));
             transcriptPO.setUoSCode(rs.getString(2));
             transcriptPO.setSemester(rs.getString(3));
-            transcriptPO.setYear(rs.getInt(4));;
+            transcriptPO.setYear(rs.getInt(4));
             transcriptPO.setGrade(rs.getString(5));
             System.out.println(transcriptPO.toString());
             takenCoursesSet.add(transcriptPO.getUoSCode());

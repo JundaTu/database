@@ -9,10 +9,9 @@ import com.po.TranscriptPO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @program database
@@ -22,7 +21,7 @@ import java.util.Set;
  */
 public class WithdrawScreen {
     public int enterWithdrawScreen(StudentPO studentPO) throws Exception{
-        Set<String> curCourseSet = new HashSet<>();
+
 
         Connection conn = DBHelper.getConnection();
 
@@ -33,7 +32,10 @@ public class WithdrawScreen {
          * @Date 19:35 11/20/18
          **/
         Scanner sc = new Scanner(System.in);
+
         while (true) {
+            Map<String, TranscriptPO> courseMap = new HashMap<>();
+            Set<String> curCourseSet = new HashSet<>();
             String queryForNotFinishCourse = "select *\n" +
                     "from transcript\n" +
                     "where transcript.Grade is null and transcript.StudId = " + studentPO.getId();
@@ -41,8 +43,15 @@ public class WithdrawScreen {
             ResultSet rsForWithdraw = ps.executeQuery();
 
             while (rsForWithdraw.next()) {
-                curCourseSet.add(rsForWithdraw.getString(2));
+                TranscriptPO courseTranscript = new TranscriptPO();
+                courseTranscript.setStudId(rsForWithdraw.getInt(1));
+                courseTranscript.setUoSCode(rsForWithdraw.getString(2));
+                courseTranscript.setSemester(rsForWithdraw.getString(3));
+                courseTranscript.setYear(rsForWithdraw.getInt(4));
+                curCourseSet.add(courseTranscript.getUoSCode());
+                courseMap.put(courseTranscript.getUoSCode(), courseTranscript);
             }
+
             for (String s : curCourseSet) {
                 System.out.println(s);
             }
@@ -58,6 +67,7 @@ public class WithdrawScreen {
             String command = sc.nextLine();
             if (Navigator.navigator.contains(command)) {
                 int code = Navigator.toDifferntScreen(command);
+
                 if (code == -1) {
                     System.out.println(command + " is unknown.");
                     System.out.print("Please enter the right command");
@@ -68,6 +78,15 @@ public class WithdrawScreen {
                 }
             } else if (curCourseSet.contains(command)) {
                 //call store procedure to finish withdraw
+                TranscriptPO tclass =  courseMap.get(command);
+                String queryCallWithdrawclass = "call withdrawclass(" + studentPO.getId() +
+                        ", '" + tclass.getUoSCode() +"', " + tclass.getYear() + ", '" + tclass.getSemester() + "');";
+
+                CallableStatement cStmt = conn.prepareCall(queryCallWithdrawclass);
+
+                // cStmt.setString(studentPO.getId(), tclass.getUoSCode(), tclass.getYear(),tclass.getSemester());
+                cStmt.executeQuery();
+
                 System.out.println("Withdraw the class successfully.");
             } else {
                 System.out.println("The command you enter is unknown. Check it and try again");

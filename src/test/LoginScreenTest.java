@@ -2,7 +2,7 @@ package test;
 
 import com.sevice.LoginScreen;
 import org.junit.Test;
-import sun.jvm.hotspot.StackTrace;
+//import sun.jvm.hotspot.StackTrace;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;

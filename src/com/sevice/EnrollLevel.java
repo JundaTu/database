@@ -1,6 +1,7 @@
 package com.sevice;
 
 import com.Enum.Levels;
+// import com.jdbcHelper.DBHelper;
 import com.jdbcHelper.DBHelper;
 import com.otherUsefulObject.ConsForLevels;
 import com.otherUsefulObject.Navigator;
@@ -11,6 +12,7 @@ import com.po.StudentPO;
 import com.po.UoSOfferingPO;
 import com.utils.TimeUtils;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,7 +44,7 @@ public class EnrollLevel {
                 "from uosoffering as uoso, transcript as t, unitofstudy as uos\n" +
                 "where uoso.UoSCode = uos.UoSCode and uoso.UoSCode not in\n" +
                 "     (select transcript.UoSCode from transcript\n" +
-                "      where transcript.StudId = 3213)) as t1\n" +
+                "      where transcript.StudId = " + studentPO.getId() + ")) as t1\n" +
                 "where t1.Year = "+ curSemester.getYear() +" and t1.Semester = "+ "'" + curSemester.getQuater() + "'" +
                 " or t1.Year = "+ nextSemester.getYear()+" and t1.Semester = " + "'" + nextSemester.getQuater() + "'";
         PreparedStatement statementForEnrollableCourse = conn.prepareStatement(queryForEnrollableCourse);
@@ -110,7 +112,7 @@ public class EnrollLevel {
             System.out.println("###OR Your can enter the course you want to enroll");
 
             String courseCode = sc.nextLine();
-            courseCode = courseCode.toLowerCase();
+            courseCode = courseCode.toUpperCase();
             if (Navigator.navigator.contains(courseCode)) {
                 int code = Navigator.toDifferntScreen(courseCode);
                 if (code == -1) {
@@ -136,10 +138,13 @@ public class EnrollLevel {
                         "      where transcript.StudId = "+ studentPO.getId() +")) as t1\n" +
                         "where t1.UoSCode = '" + courseCode +"' and t1.Enrollment < t1.MaxEnrollment " +
                         "and t1.Year = "+ goalYear+" and t1.Semester = '" + goalQuarter + "' ";
+                // stored procedure for maxenrollment
+                String spQueryForOffering = "";
+
                 PreparedStatement offerStatement = conn.prepareStatement(queryForOffering);
                 ResultSet tmpRs;
                 try {
-                    tmpRs = offerStatement.executeQuery();;
+                    tmpRs = offerStatement.executeQuery();
                 } catch (Exception e) {
                     System.out.println("error of input, try again");
                     continue;
@@ -167,13 +172,14 @@ public class EnrollLevel {
                     }
                     if (finishedCousre.contains(requiresPO.getPrereqUoSCode())) {
                         //call store procesure to
-                        System.out.print("you can enroll");
+                        System.out.println("you can enroll");
+                        String queryCallEnroll = "call enrollclass(" + studentPO.getId() +
+                                ", '" + courseCode +"', " + goalYear + ", '" + goalQuarter + "');";
 
-
-
-
-
-                        ///
+                        CallableStatement cStmt = conn.prepareCall(queryCallEnroll);
+                        cStmt.executeQuery();
+                        courseSetForEnrollment.remove(courseCode);
+                        System.out.println("enrolled successfully");
 
                     } else {
                         System.out.println("You do not meet the pre-requirement to take this course.");
