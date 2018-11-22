@@ -177,7 +177,13 @@ public class EnrollLevel {
                                 ", '" + courseCode +"', " + goalYear + ", '" + goalQuarter + "');";
 
                         CallableStatement cStmt = conn.prepareCall(queryCallEnroll);
-                        cStmt.executeQuery();
+                        try {
+                            cStmt.executeQuery();
+                        }
+                        catch (Exception e){
+                            System.out.println(courseCode + ": enrollment less than half of maxenrollment");
+                        }
+
                         courseSetForEnrollment.remove(courseCode);
                         System.out.println("enrolled successfully");
 
