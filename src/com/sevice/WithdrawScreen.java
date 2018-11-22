@@ -60,9 +60,10 @@ public class WithdrawScreen {
             System.out.println("1.Transcript");
             System.out.println("2.Student menu");
             System.out.println("3.Enroll");
-            System.out.println("4.Personal");
-            System.out.println("5.Logout");
-            System.out.println("6.Exit");
+            System.out.println("4.Withdraw");
+            System.out.println("5.Personal");
+            System.out.println("6.Logout");
+            System.out.println("7.Exit");
             System.out.println("You can enter \"back\" to go back to student menu OR you can enter the course that you want to withdraw");
             String command = sc.nextLine();
             if (Navigator.navigator.contains(command)) {

@@ -104,15 +104,16 @@ public class EnrollLevel {
             System.out.println("###Your can access each other portals following: ");
             System.out.println("1.Transcript");
             System.out.println("2.Student menu");
-            System.out.println("3.Withdraw");
-            System.out.println("4.Personal");
-            System.out.println("5.Logout");
-            System.out.println("6.Exit");
+            System.out.println("3.Enroll");
+            System.out.println("4.Withdraw");
+            System.out.println("5.Personal");
+            System.out.println("6.Logout");
+            System.out.println("7.Exit");
 
             System.out.println("###OR Your can enter the course you want to enroll");
 
             String courseCode = sc.nextLine();
-            courseCode = courseCode.toUpperCase();
+            courseCode = courseCode.toLowerCase();
             if (Navigator.navigator.contains(courseCode)) {
                 int code = Navigator.toDifferntScreen(courseCode);
                 if (code == -1) {
@@ -124,11 +125,13 @@ public class EnrollLevel {
                     return code;
                 }
             }
-            System.out.println("input the year");
-            String goalYear = sc.next();
-            System.out.println("input the quarter");
-            String goalQuarter = sc.next();
+            courseCode = courseCode.toUpperCase();
+
             if (courseSetForEnrollment.contains(courseCode)) {
+                System.out.println("input the year");
+                String goalYear = sc.nextLine();
+                System.out.println("input the quarter");
+                String goalQuarter = sc.nextLine();
                 //maxenrollment
                 String queryForOffering = "select distinct * from\n" +
                         "(select uoso.UoSCode, uoso.Enrollment, uoso.MaxEnrollment, uoso.Semester, uoso.Year\n" +
@@ -172,6 +175,12 @@ public class EnrollLevel {
                     }
                     if (finishedCousre.contains(requiresPO.getPrereqUoSCode())) {
                         //call store procesure to
+                        for (EnrollableCourse ec : listOfEnrollableCourse) {
+                            if (ec.getUoSCode().equals(courseCode)) {
+                                listOfEnrollableCourse.remove(ec);
+                                break;
+                            }
+                        }
                         System.out.println("you can enroll");
                         String queryCallEnroll = "call enrollclass(" + studentPO.getId() +
                                 ", '" + courseCode +"', " + goalYear + ", '" + goalQuarter + "');";

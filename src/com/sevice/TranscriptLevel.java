@@ -11,9 +11,7 @@ import com.po.TranscriptPO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @program database
@@ -24,6 +22,7 @@ import java.util.Set;
 public class TranscriptLevel {
     public int getTranscript(StudentPO studentPO) throws Exception{
         Set<String> takenCoursesSet = new HashSet<>();
+        List<TranscriptPO> listOfTranscript = new ArrayList<>();
 
         //query the data from database
         Connection conn = DBHelper.getConnection();
@@ -38,22 +37,25 @@ public class TranscriptLevel {
             transcriptPO.setSemester(rs.getString(3));
             transcriptPO.setYear(rs.getInt(4));
             transcriptPO.setGrade(rs.getString(5));
-            System.out.println(transcriptPO.toString());
+            //System.out.println(transcriptPO.toString());
+            listOfTranscript.add(transcriptPO);
             takenCoursesSet.add(transcriptPO.getUoSCode());
         }
 
 
         Scanner sc = new Scanner(System.in);
         while (true) {
-            System.out.println("///////////////////////////////////////////////////");
-            System.out.println("HERE TRANCRIPTION");
+            for (TranscriptPO tp : listOfTranscript) {
+                System.out.println(tp.toString());
+            }
             System.out.println("###Your can access each other portals following: ");
-            System.out.println("1.Personal");
+            System.out.println("1.Transcript");
             System.out.println("2.Student menu");
-            System.out.println("3.Withdraw");
-            System.out.println("4.Enroll");
-            System.out.println("5.Logout");
-            System.out.println("6.Exit");
+            System.out.println("3.Enroll");
+            System.out.println("4.Withdraw");
+            System.out.println("5.Personal");
+            System.out.println("6.Logout");
+            System.out.println("7.Exit");
             System.out.println("### Or you can access the detail of courses you enrolled by entering the UoSCode");
             //System.out.println("Or you can input \"back\" to go back to student menu");
 

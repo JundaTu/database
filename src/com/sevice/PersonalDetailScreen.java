@@ -27,10 +27,11 @@ public class PersonalDetailScreen {
             System.out.println("###Your can access each other portals following: ");
             System.out.println("1.Transcript");
             System.out.println("2.Student menu");
-            System.out.println("3.Withdraw");
-            System.out.println("4.Enroll");
-            System.out.println("5.Logout");
-            System.out.println("6.Exit");
+            System.out.println("3.Enroll");
+            System.out.println("4.Withdraw");
+            System.out.println("5.Personal");
+            System.out.println("6.Logout");
+            System.out.println("7.Exit");
             System.out.println("###You can enter \"password\" or \"address\" to change password, address.");
             String command = sc.nextLine();
             command = command.toLowerCase();
